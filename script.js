@@ -31,24 +31,31 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Función para mostrar los datos del Pokémon en la página
     function displayPokemonData(pokemon) {
         const pokemonDataDiv = document.getElementById('pokemonData');
+    
         pokemonDataDiv.innerHTML = `
             <div class="card bg-white" style="width: 18rem;">
-    <img src="${pokemon.sprites.front_default}" class="card-img-top" alt="${pokemon.name}">
-    <div class="card-body">
-        <h5 class="card-title">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h5>
-        <p class="card-text">
-            <strong>ID:</strong> ${pokemon.id}<br>
-            <strong>Altura:</strong> ${pokemon.height / 10} m<br>
-            <strong>Peso:</strong> ${pokemon.weight / 10} kg<br>
-            <strong>Tipos:</strong> ${pokemon.types.map(type => type.type.name).join(', ')}
-        </p>
-    </div>
-</div>
+                <img src="${pokemon.sprites.front_default}" class="card-img-top" alt="${pokemon.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h5>
+                    <p class="card-text">
+                        <strong>ID:</strong> ${pokemon.id}<br>
+                        <strong>Altura:</strong> ${pokemon.height / 10} m<br>
+                        <strong>Peso:</strong> ${pokemon.weight / 10} kg<br>
+                        <strong>Tipos:</strong> ${pokemon.types.map(type => type.type.name).join(', ')}<br>
+                        <strong>Habilidades:</strong> ${pokemon.abilities.map(ability => ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1)).join(', ')}<br>
+                        <strong>Experiencia base:</strong> ${pokemon.base_experience}<br>
+                        <strong>Estadísticas base:</strong><br>
+                        <ul>
+                            ${pokemon.stats.map(stat => `<li>${stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}: ${stat.base_stat}</li>`).join('')}
+                        </ul>
+                    </p>
+                </div>
+            </div>
         `;
     }
+    
 
 });
 
@@ -56,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Función para cambiar el fondo
         function setBackgroundImage() {
             const body = document.querySelector('body');
-            const imageUrl = 'pokemon 1.jpg'; // Reemplaza con la ruta correcta a tu imagen
+            const imageUrl = 'pokemon 1.jpg';
             body.style.backgroundImage = `url('${imageUrl}')`;
             body.style.backgroundSize = 'cover';
             body.style.backgroundPosition = 'center';
